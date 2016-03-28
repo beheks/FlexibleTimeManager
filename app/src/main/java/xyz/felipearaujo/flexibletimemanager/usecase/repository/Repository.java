@@ -1,6 +1,4 @@
-package repository;
-
-import rx.Observable;
+package xyz.felipearaujo.flexibletimemanager.usecase.repository;
 
 /**
  * Created by tatianaschmidt on 3/28/16.
