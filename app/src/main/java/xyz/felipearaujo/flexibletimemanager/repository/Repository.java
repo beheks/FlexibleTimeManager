@@ -1,4 +1,4 @@
-package xyz.felipearaujo.flexibletimemanager.usecase.repository;
+package xyz.felipearaujo.flexibletimemanager.repository;
 
 /**
  * Created by tatianaschmidt on 3/28/16.

@@ -1,4 +1,4 @@
-package xyz.felipearaujo.flexibletimemanager.usecase.entities;
+package xyz.felipearaujo.flexibletimemanager.entities;
 
 import java.util.List;
 
