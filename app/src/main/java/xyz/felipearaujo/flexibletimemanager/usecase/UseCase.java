@@ -1,7 +1,7 @@
 package xyz.felipearaujo.flexibletimemanager.usecase;
 
+import rx.Observable;
+
 public abstract class UseCase {
-    public abstract Observable buildUseCase();
-
-
+    protected abstract Observable buildUseCase();
 }
