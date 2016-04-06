@@ -1,9 +1,12 @@
 package xyz.felipearaujo.flexibletimemanager.usecase;
 
+import javax.inject.Inject;
+
 import rx.Observable;
+import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
 
 public class GetLocation extends UseCase {
-    private DataStore dataStore;
+    @Inject DataSource dataSource;
     private int id;
 
     public GetLocation(int id) {
@@ -12,6 +15,6 @@ public class GetLocation extends UseCase {
 
     @Override
     protected Observable buildUseCase() {
-        return dataStore.getLocation(this.id);
+        return dataSource.getLocation(this.id);
     }
 }

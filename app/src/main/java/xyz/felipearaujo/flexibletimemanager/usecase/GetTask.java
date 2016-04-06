@@ -3,9 +3,10 @@ package xyz.felipearaujo.flexibletimemanager.usecase;
 import javax.inject.Inject;
 
 import rx.Observable;
+import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
 
 public class GetTask extends UseCase {
-    @Inject private final DataStore dataStore;
+    @Inject DataSource dataSource;
     private int id;
 
     public GetTask(int id) {
@@ -13,6 +14,6 @@ public class GetTask extends UseCase {
     }
 
     protected Observable buildUseCase() {
-        return dataStore.getTask(this.id);
+        return dataSource.getTask(this.id);
     }
 }
