@@ -9,14 +9,22 @@ public abstract class UseCase {
     /**
      * Thread in which the {@link rx.Observable} will be executed
      */
-    private Scheduler executionThread;
+    private Scheduler mExecutionThread;
 
     /**
      * Thread in which the {@link rx.Subscriber} will be executed
      */
-    private Scheduler resultThread;
+    private Scheduler mResultThread;
 
-    private Subscription subscription;
+    /**
+     * Subscriber that's requesting the data
+     */
+    private Subscription mSubscription;
+
+    protected UseCase(Scheduler executionThread, Scheduler resultThread) {
+        mExecutionThread = executionThread;
+        mResultThread = resultThread;
+    }
 
     /**
      * Build the {@link rx.Observable} to be executed when the {@link UseCase} runs
@@ -30,9 +38,9 @@ public abstract class UseCase {
      */
     @SuppressWarnings("unchecked")
     public void execute(Subscriber subscriber) {
-        this.subscription = this.buildUseCase()
-                .subscribeOn(executionThread)
-                .observeOn(resultThread)
+        this.mSubscription = this.buildUseCase()
+                .subscribeOn(mExecutionThread)
+                .observeOn(mResultThread)
                 .subscribe(subscriber);
     }
 
@@ -40,8 +48,8 @@ public abstract class UseCase {
      * Stop listening to the current usecase
      */
     public void unsubscribe() {
-        if(!this.subscription.isUnsubscribed()) {
-            this.subscription.unsubscribe();
+        if(!this.mSubscription.isUnsubscribed()) {
+            this.mSubscription.unsubscribe();
         }
     }
 }

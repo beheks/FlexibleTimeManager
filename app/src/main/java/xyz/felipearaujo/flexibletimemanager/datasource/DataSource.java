@@ -5,13 +5,13 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import rx.Observable;
-import xyz.felipearaujo.flexibletimemanager.entities.Location;
-import xyz.felipearaujo.flexibletimemanager.entities.Task;
+import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
+import xyz.felipearaujo.flexibletimemanager.datasource.entities.Task;
 
 public interface DataSource {
     /* Tasks */
-    Observable<Task> getTask(int id);
-    Observable<List<Task>> getTasks(int[] ids);
+    Observable<Task> getTask(long id);
+    Observable<List<Task>> getTasks(@NonNull long[] ids);
     Observable<List<Task>> getAllTasks();
 
     Observable<Boolean> updateTask(@NonNull Task task);
@@ -20,21 +20,21 @@ public interface DataSource {
     Observable<Task> addTask(@NonNull Task task);
     Observable<List<Task>> addTasks(@NonNull List<Task> tasks);
 
-    Observable<Task> deleteTask(int id);
-    Observable<List<Task>> deleteTasks(@NonNull int[] ids);
+    Observable<Task> deleteTask(long id);
+    Observable<List<Task>> deleteTasks(@NonNull long[] ids);
     Observable<List<Task>> deleteAllTasks();
 
     /* Locations */
-    Observable<Task> getLocation(int id);
-    Observable<List<Task>> getLocations();
+    Observable<Location> getLocation(long id);
+    Observable<List<Location>> getLocations();
 
     Observable<Boolean> updateLocation(@NonNull Task task);
     Observable<Boolean> updateLocations(@NonNull List<Task> tasks);
 
-    Observable<Task> addLocation(@NonNull Task task);
-    Observable<List<Task>> addLocations(@NonNull List<Task> tasks);
+    Observable<Location> addLocation(@NonNull Task task);
+    Observable<List<Location>> addLocations(@NonNull List<Task> tasks);
 
-    Observable<Task> deleteLocation(int id);
-    Observable<List<Task>> deleteLocations(@NonNull int[] ids);
-    Observable<List<Task>> deleteAllLocations();
+    Observable<Location> deleteLocation(long id);
+    Observable<List<Location>> deleteLocations(@NonNull long[] ids);
+    Observable<List<Location>> deleteAllLocations();
 }

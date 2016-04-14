@@ -6,6 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
+import xyz.felipearaujo.flexibletimemanager.datasource.dao.LocationDao;
+import xyz.felipearaujo.flexibletimemanager.datasource.dao.TaskDao;
 import xyz.felipearaujo.flexibletimemanager.injection.module.CommonModule;
 
 @Singleton
@@ -13,4 +15,6 @@ import xyz.felipearaujo.flexibletimemanager.injection.module.CommonModule;
 public interface CommonComponent {
     Application getApplication();
     DataSource getDataSource();
+    TaskDao getTaskDao();
+    LocationDao getLocationDao();
 }
