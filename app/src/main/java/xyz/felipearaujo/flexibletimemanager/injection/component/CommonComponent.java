@@ -2,6 +2,8 @@ package xyz.felipearaujo.flexibletimemanager.injection.component;
 
 import android.app.Application;
 
+import com.squareup.sqlbrite.BriteDatabase;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -17,4 +19,5 @@ public interface CommonComponent {
     DataSource getDataSource();
     TaskDao getTaskDao();
     LocationDao getLocationDao();
+    BriteDatabase getBriteDatabase();
 }

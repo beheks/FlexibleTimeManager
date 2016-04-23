@@ -1,37 +1,30 @@
 package xyz.felipearaujo.flexibletimemanager.injection.module;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteOpenHelper;
 
-import com.hannesdorfmann.sqlbrite.dao.DaoManager;
+import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite.SqlBrite;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import rx.Scheduler;
+import xyz.felipearaujo.flexibletimemanager.datasource.DbOpenHelper;
 import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
 import xyz.felipearaujo.flexibletimemanager.datasource.DbDataSource;
-import xyz.felipearaujo.flexibletimemanager.datasource.dao.LocationDao;
-import xyz.felipearaujo.flexibletimemanager.datasource.dao.TaskDao;
 
 @Module
 public class CommonModule {
     private static Application sApplication;
-    private static LocationDao sLocationDao;
-    private static TaskDao sTaskDao;
+    private static Scheduler sBackgroundTask;
+    private static Scheduler sForegroundTask;
 
-    public CommonModule(Application app) {
-        sTaskDao = new TaskDao();
-        sLocationDao = new LocationDao();
-
-        DaoManager
-                .with(app.getApplicationContext())
-                .databaseName("FlexibleTimeManager.db")
-                .add(sTaskDao)
-                .add(sLocationDao)
-                .logging(true)
-                .build();
-
+    public CommonModule(Application app, Scheduler backgroundTask, Scheduler foregroundTask) {
         sApplication = app;
+        sBackgroundTask = backgroundTask;
+        sForegroundTask = foregroundTask;
     }
 
     @Provides
@@ -48,14 +41,13 @@ public class CommonModule {
 
     @Provides
     @Singleton
-    LocationDao provideLocationDao() {
-        return sLocationDao;
+    SQLiteOpenHelper provideOpenHelper(Application app) {
+        return new DbOpenHelper(sApplication.getApplicationContext());
     }
 
     @Provides
     @Singleton
-    TaskDao provideTaskDao() {
-        return sTaskDao;
+    BriteDatabase provideBriteDabase(SQLiteOpenHelper helper) {
+        return SqlBrite.create().wrapDatabaseHelper(helper, sBackgroundTask);
     }
-
 }

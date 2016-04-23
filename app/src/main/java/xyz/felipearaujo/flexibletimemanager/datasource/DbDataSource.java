@@ -2,6 +2,8 @@ package xyz.felipearaujo.flexibletimemanager.datasource;
 
 import android.support.annotation.NonNull;
 
+import com.squareup.sqlbrite.BriteDatabase;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,12 +15,9 @@ import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Task;
 
 public class DbDataSource implements DataSource {
-    @Inject protected LocationDao locationDao;
-    @Inject protected TaskDao taskDao;
+    @Inject BriteDatabase db;
 
     public DbDataSource() {
-        locationDao = new LocationDao();
-        taskDao = new TaskDao();
     }
 
     @Override

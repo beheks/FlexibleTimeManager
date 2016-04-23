@@ -17,7 +17,7 @@ public class LocationDao extends Dao {
     @Override
     public void createTable(SQLiteDatabase db) {
         CREATE_TABLE(Location.TABLE_NAME,
-                Location.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT 1 NOT NULL",
+                Location.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT 1",
                 Location.COL_NAME + " TEXT"
         ).execute(db);
     }
