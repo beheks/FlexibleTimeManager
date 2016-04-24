@@ -14,7 +14,6 @@ public class Location {
 
     @Column(COL_ID) long mId;
     @Column(COL_NAME) String mName;
-    @Column(COL_RULE_GEOLOCATION) RuleGeolocation ruleGeolocation;
 
     private List<Rule> mRules;
     private List<Task> mTasks;

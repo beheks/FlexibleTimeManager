@@ -27,7 +27,7 @@ dependencies {
     def rxJavaVersion = '1.1.2'
     def rxAndroidVersion = '1.1.0'
     def butterKnifeVersion = '7.0.1'
-    def appCompatVersion = '23.1.1'
+    def androidLibVersion = '23.1.1'
     def javaxAnnotationJsr250Version = '1.0'
     def sqlBriteVersion = '0.6.2'
     def sqlBriteDaoVersion = '0.6.0'
@@ -37,7 +37,9 @@ dependencies {
     def rxJava = "io.reactivex:rxjava:" + rxJavaVersion
     def rxAndroid = "io.reactivex:rxandroid:" + rxAndroidVersion
     def butterKnife = "com.jakewharton:butterknife:" + butterKnifeVersion
-    def appCompat = "com.android.support:appcompat-v7:" + appCompatVersion
+    def appCompat = "com.android.support:appcompat-v7:" + androidLibVersion
+    def support = "com.android.support:support-v4:" + androidLibVersion
+    def design = "com.android.support:design:" + androidLibVersion
     def javaxAnnotationJsr250 = 'javax.annotation:jsr250-api:' + javaxAnnotationJsr250Version
     def sqlBrite = 'com.squareup.sqlbrite:sqlbrite:' + sqlBriteVersion
     def sqlBriteDao = 'com.hannesdorfmann.sqlbrite:dao:' + sqlBriteDaoVersion
@@ -69,6 +71,8 @@ dependencies {
     compile rxAndroid
     compile butterKnife
     compile sqlBrite
+    compile support
+    compile design
 
     /* Unit Tests */
     testCompile jUnit

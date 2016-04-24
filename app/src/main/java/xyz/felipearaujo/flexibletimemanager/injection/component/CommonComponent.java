@@ -17,7 +17,5 @@ import xyz.felipearaujo.flexibletimemanager.injection.module.CommonModule;
 public interface CommonComponent {
     Application getApplication();
     DataSource getDataSource();
-    TaskDao getTaskDao();
-    LocationDao getLocationDao();
     BriteDatabase getBriteDatabase();
 }

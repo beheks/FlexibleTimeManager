@@ -10,7 +10,6 @@ import java.util.List;
 import rx.Observable;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Task;
-import xyz.felipearaujo.flexibletimemanager.datasource.entities.TaskMapper;
 
 @SuppressWarnings("unchecked")
 public class TaskDao extends Dao {
@@ -27,14 +26,7 @@ public class TaskDao extends Dao {
     }
 
     public Observable<Task> getTask(long id) {
-        return query(
-                SELECT("*")
-                .FROM(Task.TABLE_NAME)
-                .WHERE(Task.COL_ID + " = ? "))
-
-                .args(String.valueOf(id))
-                .run()
-                .mapToOneOrDefault(TaskMapper.MAPPER, null);
+        return null;
     }
 
     public Observable<List<Task>> getTasks(@NonNull long[] ids) {

@@ -9,7 +9,6 @@ import java.util.List;
 
 import rx.Observable;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
-import xyz.felipearaujo.flexibletimemanager.datasource.entities.LocationMapper;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Task;
 
 @SuppressWarnings("unchecked")
@@ -27,14 +26,7 @@ public class LocationDao extends Dao {
     }
 
     public Observable<Location> getLocation(long id) {
-        return query(
-                SELECT("*")
-                .FROM(Location.TABLE_NAME)
-                .WHERE(Location.COL_ID + " = ? "))
-
-                .args(String.valueOf(id))
-                .run()
-                .mapToOneOrDefault(LocationMapper.MAPPER, null);
+        return null;
     }
 
     public Observable<List<Location>> getLocations() {
