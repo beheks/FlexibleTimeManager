@@ -48,7 +48,7 @@ dependencies {
     def jUnitVersion = '4.12'
     def androidJUnitVersion = '0.5'
 
-    def jUnit ='junit:junit:' + jUnitVersion
+    def jUnit = 'junit:junit:' + jUnitVersion
     def androidJUnitRules = "com.android.support.test:rules:" + androidJUnitVersion
     def androidJUnitRunner = "com.android.support.test:runner:" + androidJUnitVersion
 
@@ -82,7 +82,7 @@ dependencies {
 
     /* Instrumentation Tests */
     androidTestCompile androidJUnitRules
-    androidTestCompile (androidJUnitRunner) {
+    androidTestCompile(androidJUnitRunner) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
