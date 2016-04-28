@@ -10,8 +10,8 @@ public class GetTask extends UseCase {
     @Inject DataSource dataSource;
     private int id;
 
-    public GetTask(Scheduler executionThread, Scheduler resultThread, int id) {
-        super(executionThread, resultThread);
+    public GetTask(int id) {
+        super();
         this.id = id;
     }
 

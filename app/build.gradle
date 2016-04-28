@@ -27,22 +27,23 @@ dependencies {
     def rxJavaVersion = '1.1.2'
     def rxAndroidVersion = '1.1.0'
     def butterKnifeVersion = '7.0.1'
-    def appCompatVersion = '23.1.1'
+    def androidSupportVersion = '23.1.1'
     def javaxAnnotationJsr250Version = '1.0'
     def sqlBriteVersion = '0.6.2'
-    def sqlBriteDaoVersion = '0.6.0'
+    def autoValueVersion = '1.2'
+    def autoValueParcelableVersion = '0.2.1'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:" + daggerVersion
     def dagger = "com.google.dagger:dagger:" + daggerVersion
     def rxJava = "io.reactivex:rxjava:" + rxJavaVersion
     def rxAndroid = "io.reactivex:rxandroid:" + rxAndroidVersion
     def butterKnife = "com.jakewharton:butterknife:" + butterKnifeVersion
-    def appCompat = "com.android.support:appcompat-v7:" + appCompatVersion
     def javaxAnnotationJsr250 = 'javax.annotation:jsr250-api:' + javaxAnnotationJsr250Version
     def sqlBrite = 'com.squareup.sqlbrite:sqlbrite:' + sqlBriteVersion
-    def sqlBriteDao = 'com.hannesdorfmann.sqlbrite:dao:' + sqlBriteDaoVersion
-    def sqlBriteDaoMapper = 'com.hannesdorfmann.sqlbrite:object-mapper:' + sqlBriteDaoVersion
-    def sqlBriteDaoAnnotations = 'com.hannesdorfmann.sqlbrite:annotations:' + sqlBriteDaoVersion
+    def appCompat = "com.android.support:appcompat-v7:" + androidSupportVersion
+    def androidSupport = 'com.android.support:support-v4:' + androidSupportVersion
+    def autoValue = 'com.google.auto.value:auto-value:' + autoValueVersion
+    def autoValueParcelable = 'com.ryanharter.auto.value:auto-value-parcel:' + autoValueParcelableVersion
 
     /* Test */
     def jUnitVersion = '4.12'
@@ -60,15 +61,14 @@ dependencies {
     compile dagger
     provided javaxAnnotationJsr250
 
-    compile sqlBriteDao
-    compile sqlBriteDaoAnnotations
-    apt sqlBriteDaoMapper
-
     compile appCompat
     compile rxJava
     compile rxAndroid
     compile butterKnife
     compile sqlBrite
+    compile androidSupport
+    compile autoValue
+    compile autoValueParcelable
 
     /* Unit Tests */
     testCompile jUnit

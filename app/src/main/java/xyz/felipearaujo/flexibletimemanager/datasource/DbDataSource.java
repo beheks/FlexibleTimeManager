@@ -9,8 +9,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
-import xyz.felipearaujo.flexibletimemanager.datasource.dao.LocationDao;
-import xyz.felipearaujo.flexibletimemanager.datasource.dao.TaskDao;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Task;
 

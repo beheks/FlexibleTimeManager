@@ -10,8 +10,8 @@ public class GetLocation extends UseCase {
     @Inject DataSource dataSource;
     private int id;
 
-    public GetLocation(Scheduler executionThread, Scheduler resultThread, int id) {
-        super(executionThread, resultThread);
+    public GetLocation(int id) {
+        super();
         this.id = id;
     }
 

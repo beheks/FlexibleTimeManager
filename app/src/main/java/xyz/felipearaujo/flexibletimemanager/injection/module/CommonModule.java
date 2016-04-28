@@ -10,21 +10,31 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import rx.Scheduler;
 import xyz.felipearaujo.flexibletimemanager.datasource.DbOpenHelper;
 import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
 import xyz.felipearaujo.flexibletimemanager.datasource.DbDataSource;
+import xyz.felipearaujo.flexibletimemanager.injection.BackgroundThread;
+import xyz.felipearaujo.flexibletimemanager.injection.ForegroundThread;
+import xyz.felipearaujo.flexibletimemanager.usecase.GetTask;
 
 @Module
 public class CommonModule {
     private static Application sApplication;
-    private static Scheduler sBackgroundTask;
-    private static Scheduler sForegroundTask;
 
-    public CommonModule(Application app, Scheduler backgroundTask, Scheduler foregroundTask) {
+    public CommonModule(Application app) {
         sApplication = app;
-        sBackgroundTask = backgroundTask;
-        sForegroundTask = foregroundTask;
+    }
+
+    @Provides
+    @Singleton
+    BackgroundThread provideBackgroundTask() {
+        return new BackgroundThread();
+    }
+
+    @Provides
+    @Singleton
+    ForegroundThread provideForegroundTask() {
+        return new ForegroundThread();
     }
 
     @Provides
@@ -47,7 +57,7 @@ public class CommonModule {
 
     @Provides
     @Singleton
-    BriteDatabase provideBriteDabase(SQLiteOpenHelper helper) {
-        return SqlBrite.create().wrapDatabaseHelper(helper, sBackgroundTask);
+    BriteDatabase provideBriteDabase(SQLiteOpenHelper helper, BackgroundThread bgThread) {
+        return SqlBrite.create().wrapDatabaseHelper(helper, bgThread.getScheduler());
     }
 }

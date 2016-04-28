@@ -30,7 +30,8 @@ public final class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        /* add mock */
+        db.execSQL(CREATE_LOCATION);
+        db.execSQL(CREATE_TASK);
     }
 
     @Override

@@ -2,9 +2,6 @@ package xyz.felipearaujo.flexibletimemanager;
 
 import android.app.Application;
 
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import xyz.felipearaujo.flexibletimemanager.injection.component.CommonComponent;
 import xyz.felipearaujo.flexibletimemanager.injection.component.DaggerCommonComponent;
 import xyz.felipearaujo.flexibletimemanager.injection.module.CommonModule;
@@ -16,10 +13,7 @@ public class FlexibleTimeManager extends Application {
         super.onCreate();
 
         sCommonComponent = DaggerCommonComponent.builder()
-                .commonModule(new CommonModule(
-                        this,
-                        Schedulers.io(),
-                        AndroidSchedulers.mainThread()))
+                .commonModule(new CommonModule(this))
                 .build();
     }
 
