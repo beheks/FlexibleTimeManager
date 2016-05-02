@@ -31,6 +31,7 @@ dependencies {
     def javaxAnnotationJsr250Version = '1.0'
     def sqlBriteVersion = '0.6.2'
     def sqlBriteDaoVersion = '0.6.0'
+    def materialViewVersion = '21.0.+'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:" + daggerVersion
     def dagger = "com.google.dagger:dagger:" + daggerVersion
@@ -45,6 +46,8 @@ dependencies {
     def sqlBriteDao = 'com.hannesdorfmann.sqlbrite:dao:' + sqlBriteDaoVersion
     def sqlBriteDaoMapper = 'com.hannesdorfmann.sqlbrite:object-mapper:' + sqlBriteDaoVersion
     def sqlBriteDaoAnnotations = 'com.hannesdorfmann.sqlbrite:annotations:' + sqlBriteDaoVersion
+    def cardView = 'com.android.support:cardview-v7:' + materialViewVersion
+    def recycleView = 'com.android.support:recyclerview-v7:' + materialViewVersion
 
     /* Test */
     def jUnitVersion = '4.12'
@@ -73,6 +76,9 @@ dependencies {
     compile sqlBrite
     compile support
     compile design
+
+    compile cardView
+    compile recycleView
 
     /* Unit Tests */
     testCompile jUnit

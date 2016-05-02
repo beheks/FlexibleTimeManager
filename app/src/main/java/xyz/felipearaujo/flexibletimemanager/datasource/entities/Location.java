@@ -15,6 +15,14 @@ public class Location {
     @Column(COL_ID) long mId;
     @Column(COL_NAME) String mName;
 
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String mName) {
+        this.mName = mName;
+    }
+
     private List<Rule> mRules;
     private List<Task> mTasks;
 }
