@@ -1,15 +1,53 @@
 package xyz.felipearaujo.flexibletimemanager.datasource.entities;
 
-import java.util.List;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.UUID;
 
 public class Location {
-    public static final String TABLE_NAME = "Location";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
+    private String mId;
+    private String mName;
+    private LatLng mPosition;
+    private int mFenceRadiusMeters;
+    private int mTimeSpent;
 
-    long mId;
-    String mName;
+    public Location(String name, LatLng position) {
+        mId = UUID.randomUUID().toString();
+        mName = name;
+        mPosition = position;
+        mFenceRadiusMeters = 100;
+        mTimeSpent = 0;
+    }
 
-    private List<Rule> mRules;
-    private List<Task> mTasks;
+    public Location(String name, LatLng position, int fenceRadiusMeters) {
+        mId = UUID.randomUUID().toString();
+        mName = name;
+        mPosition = position;
+        mFenceRadiusMeters = fenceRadiusMeters;
+        mTimeSpent = 0;
+    }
+
+    public Location(String id, String name, LatLng position, int fenceRadiusMeters, int timeSpent) {
+        mId = id;
+        mName = name;
+        mPosition = position;
+        mFenceRadiusMeters = fenceRadiusMeters;
+        mTimeSpent = timeSpent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(!(o.getClass().equals(this.getClass()))) return false;
+
+        Location l = (Location) o;
+        return (
+
+            (l.mTimeSpent == this.mTimeSpent) &&
+            (l.mFenceRadiusMeters == this.mFenceRadiusMeters) &&
+            (l.mPosition.equals(this.mPosition)) &&
+            (l.mId.equals(this.mId)) &&
+            (l.mName.equals(this.mName))
+
+        );
+    }
 }

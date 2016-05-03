@@ -27,7 +27,6 @@ dependencies {
     def rxJavaVersion = '1.1.2'
     def rxAndroidVersion = '1.1.0'
     def butterKnifeVersion = '7.0.1'
-    def androidSupportVersion = '23.1.1'
     def javaxAnnotationJsr250Version = '1.0'
     def sqlBriteVersion = '0.6.2'
     def autoValueVersion = '1.2'
@@ -40,10 +39,18 @@ dependencies {
     def butterKnife = "com.jakewharton:butterknife:" + butterKnifeVersion
     def javaxAnnotationJsr250 = 'javax.annotation:jsr250-api:' + javaxAnnotationJsr250Version
     def sqlBrite = 'com.squareup.sqlbrite:sqlbrite:' + sqlBriteVersion
-    def appCompat = "com.android.support:appcompat-v7:" + androidSupportVersion
-    def androidSupport = 'com.android.support:support-v4:' + androidSupportVersion
     def autoValue = 'com.google.auto.value:auto-value:' + autoValueVersion
     def autoValueParcelable = 'com.ryanharter.auto.value:auto-value-parcel:' + autoValueParcelableVersion
+
+    /* Google Stuff */
+    def androidSupportVersion = '23.1.1'
+    def playServicesVersion = '8.4.0'
+    def gsonVersion = '2.6.2'
+
+    def appCompat = "com.android.support:appcompat-v7:" + androidSupportVersion
+    def androidSupport = 'com.android.support:support-v4:' + androidSupportVersion
+    def playServices = 'com.google.android.gms:play-services:' + playServicesVersion
+    def gson = 'com.google.code.gson:gson:' + gsonVersion;
 
     /* Test */
     def jUnitVersion = '4.12'
@@ -69,6 +76,8 @@ dependencies {
     compile androidSupport
     compile autoValue
     compile autoValueParcelable
+    compile playServices
+    compile gson
 
     /* Unit Tests */
     testCompile jUnit
@@ -79,6 +88,10 @@ dependencies {
 
     testCompile rxJava
     testCompile rxAndroid
+    testCompile androidSupport
+    testCompile appCompat
+    testCompile playServices
+    testCompile gson
 
     /* Instrumentation Tests */
     androidTestCompile androidJUnitRules

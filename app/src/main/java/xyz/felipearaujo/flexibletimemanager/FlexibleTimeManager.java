@@ -2,22 +2,24 @@ package xyz.felipearaujo.flexibletimemanager;
 
 import android.app.Application;
 
-import xyz.felipearaujo.flexibletimemanager.injection.component.CommonComponent;
-import xyz.felipearaujo.flexibletimemanager.injection.component.DaggerCommonComponent;
-import xyz.felipearaujo.flexibletimemanager.injection.module.CommonModule;
+import xyz.felipearaujo.flexibletimemanager.datasource.injection.DataSourceModule;
+import xyz.felipearaujo.flexibletimemanager.injection.ApplicationModule;
+import xyz.felipearaujo.flexibletimemanager.injection.ApplicationComponent;
+import xyz.felipearaujo.flexibletimemanager.injection.DaggerApplicationComponent;
 
 public class FlexibleTimeManager extends Application {
-    private static CommonComponent sCommonComponent;
+    private static ApplicationComponent sApplicationComponent;
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sCommonComponent = DaggerCommonComponent.builder()
-                .commonModule(new CommonModule(this))
+        sApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .dataSourceModule(new DataSourceModule())
                 .build();
     }
 
-    public static CommonComponent getsCommonComponent() {
-        return sCommonComponent;
+    public static ApplicationComponent getApplicationComponent() {
+        return sApplicationComponent;
     }
 }

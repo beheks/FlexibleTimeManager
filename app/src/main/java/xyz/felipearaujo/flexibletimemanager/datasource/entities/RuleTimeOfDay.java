@@ -1,6 +1,6 @@
 package xyz.felipearaujo.flexibletimemanager.datasource.entities;
 
-public class RuleTimeOfDay implements Rule {
+public class RuleTimeOfDay extends Rule {
     // TODO: melhorar representacao de hora do dia.
     int afterHour;
     int afterMinute;

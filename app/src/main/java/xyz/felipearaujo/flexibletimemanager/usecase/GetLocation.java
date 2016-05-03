@@ -3,20 +3,27 @@ package xyz.felipearaujo.flexibletimemanager.usecase;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Scheduler;
 import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
+import xyz.felipearaujo.flexibletimemanager.injection.BackgroundThread;
+import xyz.felipearaujo.flexibletimemanager.injection.ForegroundThread;
 
-public class GetLocation extends UseCase {
-    @Inject DataSource dataSource;
-    private int id;
+public final class GetLocation extends UseCase {
 
-    public GetLocation(int id) {
-        super();
+    private String id;
+    private DataSource mDataSource;
+
+    @Inject
+    public GetLocation(String id,
+                       DataSource dataSource,
+                       BackgroundThread bgThread,
+                       ForegroundThread fgThread) {
+        super(bgThread, fgThread);
         this.id = id;
+        this.mDataSource = dataSource;
     }
 
     @Override
     protected Observable buildUseCase() {
-        return dataSource.getLocation(this.id);
+        return mDataSource.getLocation(this.id);
     }
 }
