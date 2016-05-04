@@ -19,11 +19,12 @@ public class RingTimerView extends View {
 
     private Paint mBigText;
     private Paint mSmallText;
-    private int mTextSpacing;
-    private int mTextSize;
-    private float mSmallTextScale;
-    private int mCenterOffset;
-    private int mSmallTextHeight;
+    private float mTextSpacing;
+    private float mTextSize;
+    private float mSmallTextSize;
+    private float mCenterOffset;
+    private float mSmallTextHeight;
+    private float mBigTextHeight;
 
     private int x;
     private int y;
@@ -71,37 +72,39 @@ public class RingTimerView extends View {
         mPaintGoalReached.setStyle(Paint.Style.STROKE);
         mPaintGoalReached.setStrokeWidth(mStrokeWidth);
 
-        Rect tempRect = new Rect();
-
-        mTextSize = 300;
-        mTextSpacing = 50;
-        mSmallTextScale = 0.5f;
-
         mBigText = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBigText.setTextAlign(Paint.Align.CENTER);
-        mBigText.setTextSize(mTextSize);
-        mBigText.getTextBounds("0:0", 0, 2, tempRect);
-        int bigTextHeight = tempRect.height();
 
         mSmallText = new Paint(Paint.ANTI_ALIAS_FLAG);
         mSmallText.setTextAlign(Paint.Align.CENTER);
-        mSmallText.setTextSize(mTextSize * mSmallTextScale);
-        mSmallText.getTextBounds("0:0", 0, 2, tempRect);
-        mSmallTextHeight = tempRect.height();
-
-        mCenterOffset = (bigTextHeight + mTextSpacing + mSmallTextHeight) / 2;
 
         mRadius = 0;
 
         //TODO: stop being fixed
-        mCurrentTime = 30;
-        mGoal = 400;
+        mCurrentTime = 3600;
+        mGoal = 3600;
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         mRadius = w/2;
         if(w > h) mRadius = h/2;
+
+        mTextSize = mRadius * 0.4f;
+        mTextSpacing = mTextSize * 0.2f;
+        mSmallTextSize = mTextSize * 0.35f;
+
+        Rect tempRect = new Rect();
+
+        mBigText.setTextSize(mTextSize);
+        mBigText.getTextBounds("0:0", 0, 2, tempRect);
+        mBigTextHeight = tempRect.height();
+
+        mSmallText.setTextSize(mSmallTextSize);
+        mSmallText.getTextBounds("0:0", 0, 2, tempRect);
+        mSmallTextHeight = tempRect.height();
+
+        mCenterOffset = (mBigTextHeight + mTextSpacing + mSmallTextHeight) / 2;
 
         x = w/2;
         y = h/2;
@@ -118,26 +121,52 @@ public class RingTimerView extends View {
         if(ratio >= 0.33 && ratio <= 0.66) appropriatePaint = mPaintGoalAlmostReached;
         else if(ratio > 0.66) appropriatePaint = mPaintGoalReached;
 
-        Log.d("RINGTIMER", "" + mRadius);
-        drawArc(canvas, 360f , appropriatePaint);
+
+        drawArc(canvas, 360f * ratio, appropriatePaint);
 
         canvas.drawText(
-                secToText(mCurrentTime),
+                secToText(mCurrentTime, false),
                 x,
                 y + mCenterOffset - mTextSpacing - mSmallTextHeight,
                 mBigText);
 
-        canvas.drawText(secToText(mGoal), x, y + mCenterOffset, mSmallText);
+        canvas.drawText(secToText(mGoal, true), x, y + mCenterOffset, mSmallText);
     }
 
-    private String secToText(long time) {
-        return DateUtils.formatElapsedTime(mRecycle, time);
+    private String secToText(long time, boolean omitSeconds) {
+        StringBuilder formatedTime = new StringBuilder();
+
+        if(time/3600 < 10) {
+            formatedTime.append("0");
+        }
+
+        formatedTime.append(time/3600);
+        formatedTime.append(":");
+        time = time % 3600;
+
+        if(time/60 < 10) {
+            formatedTime.append("0");
+        }
+
+        formatedTime.append(time/60);
+        time = time % 60;
+
+        if(!omitSeconds) {
+            formatedTime.append(":");
+
+            if(time < 10) {
+                formatedTime.append("0");
+            }
+
+            formatedTime.append(time);
+        }
+
+        return formatedTime.toString();
     }
 
     //TODO: MAKE BACKWARDS COMPATIBLE
     @TargetApi(21)
     private void drawArc(Canvas canvas, float angleInDegrees, Paint paint) {
-        Log.d("RingTimer", "" + angleInDegrees);
         canvas.drawArc(
                 x - mRadius + mStrokeWidth/2,
                 y - mRadius + mStrokeWidth/2,
