@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import xyz.felipearaujo.flexibletimemanager.activity.LocationItemAdapter;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
 
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         View contentView = (View) findViewById(R.id.content_view);
-/*
+
         // Set up Location view
         mRecyclerView = (RecyclerView) contentView.findViewById(R.id.locations_grid);
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // set adapter
         Location[] locations = generateFakeLocations();
         mAdapter = new LocationItemAdapter(locations);
-        mRecyclerView.setAdapter(mAdapter);*/
+        mRecyclerView.setAdapter(mAdapter);
 
         // Action to add a new Location
         FloatingActionButton addLocationfab = (FloatingActionButton) findViewById(R.id.fab);
@@ -53,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private Location[] generateFakeLocations() {
         Location[] locations = new Location[5];
         for (int i = 0; i < 5; i++) {
-            /*Location temp = new Location();
-            temp.setName("Teste: " + i);
-            locations[i] = temp;*/
+            Location temp = new Location("Localidade 1", new LatLng(123.2, -123.2), 5);
+            locations[i] = temp;
         }
         return locations;
     }

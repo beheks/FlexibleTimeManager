@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import xyz.felipearaujo.flexibletimemanager.R;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
+import xyz.felipearaujo.flexibletimemanager.view.RingTimerView;
 
 public class LocationItemAdapter extends RecyclerView.Adapter<LocationItemAdapter.ViewHolder> {
 
@@ -39,7 +40,10 @@ public class LocationItemAdapter extends RecyclerView.Adapter<LocationItemAdapte
     @Override
     public void onBindViewHolder(LocationItemAdapter.ViewHolder holder, int position) {
         TextView locationTitle = (TextView) holder.mView.findViewById(R.id.location_title);
-        locationTitle.setText(/*mLocations[position].getName()*/ "Oi");
+        locationTitle.setText("<Localidade titulo>");
+
+        RingTimerView locationRingTimer =
+                (RingTimerView) holder.mView.findViewById(R.id.location_ringTimerView);
     }
 
     @Override
