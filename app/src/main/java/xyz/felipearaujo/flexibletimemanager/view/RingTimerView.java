@@ -125,43 +125,17 @@ public class RingTimerView extends View {
         drawArc(canvas, 360f * ratio, appropriatePaint);
 
         canvas.drawText(
-                secToText(mCurrentTime, false),
+                ViewUtil.secToText(mCurrentTime, false),
                 x,
                 y + mCenterOffset - mTextSpacing - mSmallTextHeight,
                 mBigText);
 
-        canvas.drawText(secToText(mGoal, true), x, y + mCenterOffset, mSmallText);
+        canvas.drawText(ViewUtil.secToText(mGoal, true), x, y + mCenterOffset, mSmallText);
     }
 
-    private String secToText(long time, boolean omitSeconds) {
-        StringBuilder formatedTime = new StringBuilder();
-
-        if(time/3600 < 10) {
-            formatedTime.append("0");
-        }
-
-        formatedTime.append(time/3600);
-        formatedTime.append(":");
-        time = time % 3600;
-
-        if(time/60 < 10) {
-            formatedTime.append("0");
-        }
-
-        formatedTime.append(time/60);
-        time = time % 60;
-
-        if(!omitSeconds) {
-            formatedTime.append(":");
-
-            if(time < 10) {
-                formatedTime.append("0");
-            }
-
-            formatedTime.append(time);
-        }
-
-        return formatedTime.toString();
+    public void updateTimeSpent(int newValue) {
+        mCurrentTime = newValue;
+        invalidate();
     }
 
     //TODO: MAKE BACKWARDS COMPATIBLE
