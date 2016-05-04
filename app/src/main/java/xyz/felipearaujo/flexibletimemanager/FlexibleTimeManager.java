@@ -2,28 +2,24 @@ package xyz.felipearaujo.flexibletimemanager;
 
 import android.app.Application;
 
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import xyz.felipearaujo.flexibletimemanager.injection.component.CommonComponent;
-import xyz.felipearaujo.flexibletimemanager.injection.component.DaggerCommonComponent;
-import xyz.felipearaujo.flexibletimemanager.injection.module.CommonModule;
+import xyz.felipearaujo.flexibletimemanager.datasource.injection.DataSourceModule;
+import xyz.felipearaujo.flexibletimemanager.injection.ApplicationModule;
+import xyz.felipearaujo.flexibletimemanager.injection.ApplicationComponent;
+import xyz.felipearaujo.flexibletimemanager.injection.DaggerApplicationComponent;
 
 public class FlexibleTimeManager extends Application {
-    private static CommonComponent sCommonComponent;
+    private static ApplicationComponent sApplicationComponent;
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sCommonComponent = DaggerCommonComponent.builder()
-                .commonModule(new CommonModule(
-                        this,
-                        Schedulers.io(),
-                        AndroidSchedulers.mainThread()))
+        sApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .dataSourceModule(new DataSourceModule())
                 .build();
     }
 
-    public static CommonComponent getsCommonComponent() {
-        return sCommonComponent;
+    public static ApplicationComponent getApplicationComponent() {
+        return sApplicationComponent;
     }
 }

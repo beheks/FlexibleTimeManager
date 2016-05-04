@@ -1,6 +1,6 @@
 package xyz.felipearaujo.flexibletimemanager.datasource.entities;
 
-public class RuleGeolocation implements Rule {
+public class RuleGeolocation extends Rule {
     long latitude;
     long longitude;
 

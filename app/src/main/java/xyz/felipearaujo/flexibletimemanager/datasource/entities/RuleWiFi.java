@@ -1,6 +1,6 @@
 package xyz.felipearaujo.flexibletimemanager.datasource.entities;
 
-public class RuleWiFi implements Rule {
+public class RuleWiFi extends Rule {
     String connectionName;
 
     @Override
