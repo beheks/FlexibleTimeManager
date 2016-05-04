@@ -6,6 +6,10 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
+import xyz.felipearaujo.flexibletimemanager.injection.BackgroundThread;
+import xyz.felipearaujo.flexibletimemanager.injection.ForegroundThread;
+import xyz.felipearaujo.flexibletimemanager.usecase.CreateLocation;
 import xyz.felipearaujo.flexibletimemanager.usecase.GetLocation;
 import xyz.felipearaujo.flexibletimemanager.usecase.UseCase;
 
@@ -30,7 +34,18 @@ public class UseCaseModule {
     @Named("getLocation")
     @PerActivity
     @Provides
-    public UseCase provideGetLocation(GetLocation getLocation) {
-        return getLocation;
+    public UseCase provideGetLocation(DataSource dataSource,
+                                      BackgroundThread bgThread,
+                                      ForegroundThread fgThread) {
+        return new GetLocation(mId, dataSource, bgThread, fgThread);
+    }
+
+    @Named("createLocation")
+    @PerActivity
+    @Provides
+    public UseCase provideCreateLocation(DataSource dataSource,
+                                         BackgroundThread bgThread,
+                                         ForegroundThread fgThread) {
+        return new CreateLocation(mName, mPosition, dataSource, bgThread, fgThread);
     }
 }

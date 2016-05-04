@@ -1,11 +1,10 @@
 package xyz.felipearaujo.flexibletimemanager.injection;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.squareup.sqlbrite.BriteDatabase;
-import com.squareup.sqlbrite.SqlBrite;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,15 +38,8 @@ public class Module {
 
     @Provides
     @Singleton
-    DataSource provideDataSource(Gson gson, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
-        return new FileDataSource(gson, bufferedWriter, bufferedReader);
-    }
-
-
-    @Provides
-    @Singleton
-    BriteDatabase provideBriteDabase(SQLiteOpenHelper helper, BackgroundThread bgThread) {
-        return SqlBrite.create().wrapDatabaseHelper(helper, bgThread.getScheduler());
+    DataSource provideDataSource(Context context) {
+        return new FileDataSource(context);
     }
 
     @Provides

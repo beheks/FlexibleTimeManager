@@ -10,11 +10,10 @@ import xyz.felipearaujo.flexibletimemanager.injection.BackgroundThread;
 import xyz.felipearaujo.flexibletimemanager.injection.ForegroundThread;
 
 public final class CreateLocation extends UseCase {
-    String mName;
-    LatLng mPosition;
-    DataSource mDataSource;
+    private String mName;
+    private LatLng mPosition;
+    private DataSource mDataSource;
 
-    @Inject
     public CreateLocation(String name,
                           LatLng position,
                           DataSource dataSource,

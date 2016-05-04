@@ -2,8 +2,6 @@ package xyz.felipearaujo.flexibletimemanager.datasource.entities;
 
 import android.os.Parcelable;
 
-import com.google.auto.value.AutoValue;
-
 import java.util.List;
 
 

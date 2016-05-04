@@ -1,5 +1,6 @@
 package xyz.felipearaujo.flexibletimemanager.datasource.injection;
 
+import android.app.Application;
 import android.content.Context;
 
 import javax.inject.Singleton;
@@ -14,7 +15,7 @@ public class DataSourceModule {
 
     @Provides
     @Singleton
-    DataSource provideDataSource(Context context) {
-        return new FileDataSource(context);
+    DataSource provideDataSource(Application application) {
+        return new FileDataSource(application.getApplicationContext());
     }
 }

@@ -11,11 +11,11 @@ import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
 import xyz.felipearaujo.flexibletimemanager.datasource.FileDataSource;
 
 @Module
-public class ApplicationModule {
-    private static Context sContext;
+public final class ApplicationModule {
+    private static Application sApplication;
 
     public ApplicationModule(Application app) {
-        sContext = app.getApplicationContext();
+        sApplication = app;
     }
 
     @Provides
@@ -32,7 +32,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Context provideContext() {
-        return sContext;
+    Application provideApplication() {
+        return sApplication;
     }
 }

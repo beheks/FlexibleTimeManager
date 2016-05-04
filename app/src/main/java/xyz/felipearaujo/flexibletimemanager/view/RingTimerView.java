@@ -1,17 +1,21 @@
 package xyz.felipearaujo.flexibletimemanager.view;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.format.DateUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.Chronometer;
 
 public class RingTimerView extends View {
     private Paint mPaintGoalNotReached;
     private Paint mPaintGoalAlmostReached;
     private Paint mPaintGoalReached;
+    private int mStrokeWidth;
+    private int mRadius;
 
     private Paint mBigText;
     private Paint mSmallText;
@@ -19,19 +23,21 @@ public class RingTimerView extends View {
     private int mTextSize;
     private float mSmallTextScale;
     private int mCenterOffset;
-
     private int mSmallTextHeight;
-    private int mBigTextHeight;
-
-    private int mRadius;
-
-    private int mStrokeWidth;
 
     private int x;
     private int y;
 
-    public interface OnRingTimeCounterTickListener {
-        void onRing
+    private long mCurrentTime;
+    private long mGoal;
+
+    private boolean mStarted;
+    private boolean mVisible;
+
+    private StringBuilder mRecycle = new StringBuilder(8);
+
+    public interface OnRingTimerTickListener {
+        void onRingTimerTick(RingTimerView ringTimerView);
     }
 
     public RingTimerView(Context context) {
@@ -39,7 +45,7 @@ public class RingTimerView extends View {
     }
 
     public RingTimerView(Context context, AttributeSet attributeSet) {
-        this(context, null, 0);
+        this(context, attributeSet, 0);
     }
 
     public RingTimerView(Context context, AttributeSet attributeSet, int defStyleAttr) {
@@ -48,7 +54,7 @@ public class RingTimerView extends View {
     }
 
     private void init() {
-        mStrokeWidth = 20;
+        mStrokeWidth = 30;
 
         mPaintGoalNotReached = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintGoalNotReached.setARGB(255, 255, 0, 0);
@@ -74,27 +80,28 @@ public class RingTimerView extends View {
         mBigText = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBigText.setTextAlign(Paint.Align.CENTER);
         mBigText.setTextSize(mTextSize);
-        mBigText.getTextBounds("0:0", 0, 1, tempRect);
-        mBigTextHeight = tempRect.height();
+        mBigText.getTextBounds("0:0", 0, 2, tempRect);
+        int bigTextHeight = tempRect.height();
 
         mSmallText = new Paint(Paint.ANTI_ALIAS_FLAG);
         mSmallText.setTextAlign(Paint.Align.CENTER);
         mSmallText.setTextSize(mTextSize * mSmallTextScale);
-        mSmallText.getTextBounds("0:0", 0, 1, tempRect);
+        mSmallText.getTextBounds("0:0", 0, 2, tempRect);
         mSmallTextHeight = tempRect.height();
 
-        mCenterOffset = (mBigTextHeight + mTextSpacing + mSmallTextHeight) / 2;
+        mCenterOffset = (bigTextHeight + mTextSpacing + mSmallTextHeight) / 2;
 
         mRadius = 0;
 
-        new Chronometer()
-
+        //TODO: stop being fixed
+        mCurrentTime = 30;
+        mGoal = 400;
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        mRadius = w;
-        if(w > h) mRadius = h;
+        mRadius = w/2;
+        if(w > h) mRadius = h/2;
 
         x = w/2;
         y = h/2;
@@ -105,10 +112,41 @@ public class RingTimerView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        float ratio = (float) mCurrentTime / mGoal;
 
-        canvas.drawCircle(x, y, mRadius/2 - mStrokeWidth/2, mPaintGoalReached);
+        Paint appropriatePaint = mPaintGoalNotReached;
+        if(ratio >= 0.33 && ratio <= 0.66) appropriatePaint = mPaintGoalAlmostReached;
+        else if(ratio > 0.66) appropriatePaint = mPaintGoalReached;
 
-        canvas.drawText("0:10", x, y + mCenterOffset - mTextSpacing - mSmallTextHeight, mBigText);
-        canvas.drawText("0:50", x, y + mCenterOffset, mSmallText);
+        Log.d("RINGTIMER", "" + mRadius);
+        drawArc(canvas, 360f , appropriatePaint);
+
+        canvas.drawText(
+                secToText(mCurrentTime),
+                x,
+                y + mCenterOffset - mTextSpacing - mSmallTextHeight,
+                mBigText);
+
+        canvas.drawText(secToText(mGoal), x, y + mCenterOffset, mSmallText);
+    }
+
+    private String secToText(long time) {
+        return DateUtils.formatElapsedTime(mRecycle, time);
+    }
+
+    //TODO: MAKE BACKWARDS COMPATIBLE
+    @TargetApi(21)
+    private void drawArc(Canvas canvas, float angleInDegrees, Paint paint) {
+        Log.d("RingTimer", "" + angleInDegrees);
+        canvas.drawArc(
+                x - mRadius + mStrokeWidth/2,
+                y - mRadius + mStrokeWidth/2,
+                x + mRadius - mStrokeWidth/2,
+                y + mRadius - mStrokeWidth/2,
+                270.0f,
+                angleInDegrees,
+                false,
+                paint
+        );
     }
 }

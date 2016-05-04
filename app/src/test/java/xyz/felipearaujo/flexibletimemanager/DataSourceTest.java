@@ -35,11 +35,11 @@ public class DataSourceTest {
 
     @Before
     public void setup() {
-        DaggerComponent
+        /*DaggerComponent
                 .builder()
                 .module(new Module())
                 .build()
-                .inject(this);
+                .inject(this);*/
         try {
             List<Location> l = new ArrayList<>();
             l.add( new Location("0", "name", new LatLng(0.0, 0.0), 0, 0) );

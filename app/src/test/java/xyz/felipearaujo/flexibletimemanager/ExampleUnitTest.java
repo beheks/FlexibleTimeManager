@@ -35,11 +35,11 @@ public class ExampleUnitTest {
 
     @Before
     public void setup() {
-        DaggerComponent
+        /*DaggerComponent
             .builder()
             .module(new Module())
             .build()
-            .inject(this);
+            .inject(this);*/
         try {
             out.write(gson.toJson(new Location("0", "name", new LatLng(0.0, 0.0), 0, 0)));
             out.flush();

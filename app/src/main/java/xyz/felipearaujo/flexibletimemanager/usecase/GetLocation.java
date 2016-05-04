@@ -12,7 +12,6 @@ public final class GetLocation extends UseCase {
     private String id;
     private DataSource mDataSource;
 
-    @Inject
     public GetLocation(String id,
                        DataSource dataSource,
                        BackgroundThread bgThread,

@@ -1,12 +1,8 @@
 package xyz.felipearaujo.flexibletimemanager.usecase;
 
-import javax.inject.Inject;
-
 import rx.Observable;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.Subscription;
-import xyz.felipearaujo.flexibletimemanager.datasource.DataSource;
 import xyz.felipearaujo.flexibletimemanager.injection.BackgroundThread;
 import xyz.felipearaujo.flexibletimemanager.injection.ForegroundThread;
 

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         View contentView = (View) findViewById(R.id.content_view);
-
+/*
         // Set up Location view
         mRecyclerView = (RecyclerView) contentView.findViewById(R.id.locations_grid);
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // set adapter
         Location[] locations = generateFakeLocations();
         mAdapter = new LocationItemAdapter(locations);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);*/
 
         // Action to add a new Location
         FloatingActionButton addLocationfab = (FloatingActionButton) findViewById(R.id.fab);
@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private Location[] generateFakeLocations() {
         Location[] locations = new Location[5];
         for (int i = 0; i < 5; i++) {
-            Location temp = new Location();
+            /*Location temp = new Location();
             temp.setName("Teste: " + i);
-            locations[i] = temp;
+            locations[i] = temp;*/
         }
         return locations;
     }
