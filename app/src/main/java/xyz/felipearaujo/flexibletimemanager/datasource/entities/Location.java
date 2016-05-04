@@ -11,20 +11,16 @@ public class Location {
     private int mFenceRadiusMeters;
     private int mTimeSpent;
 
+    public Location() {
+        this("New Location", new LatLng(0.0, 0.0));
+    }
+
     public Location(String name, LatLng position) {
-        mId = UUID.randomUUID().toString();
-        mName = name;
-        mPosition = position;
-        mFenceRadiusMeters = 100;
-        mTimeSpent = 0;
+        this(name, position, 100);
     }
 
     public Location(String name, LatLng position, int fenceRadiusMeters) {
-        mId = UUID.randomUUID().toString();
-        mName = name;
-        mPosition = position;
-        mFenceRadiusMeters = fenceRadiusMeters;
-        mTimeSpent = 0;
+        this(UUID.randomUUID().toString(), name, position, fenceRadiusMeters, 0);
     }
 
     public Location(String id, String name, LatLng position, int fenceRadiusMeters, int timeSpent) {
