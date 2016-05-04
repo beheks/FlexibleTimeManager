@@ -8,25 +8,44 @@
     android:layout_height="match_parent">
 
     <!-- Single Location CardView -->
+
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_margin="8dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp">
 
-        <TextView
-            android:id="@+id/location_title"
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <xyz.felipearaujo.flexibletimemanager.view.RingTimerView
-            android:id="@+id/location_ringTimerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/location_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryText"/>
 
+            <xyz.felipearaujo.flexibletimemanager.view.RingTimerView
+                android:id="@+id/location_ringTimerView"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:padding="16dp"
+                android:layout_margin="16dp"/>
+
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

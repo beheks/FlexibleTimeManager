@@ -31,6 +31,10 @@ public class Location {
         mTimeSpent = timeSpent;
     }
 
+    public String getName() {
+        return mName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(!(o.getClass().equals(this.getClass()))) return false;
