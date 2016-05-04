@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private Location[] generateFakeLocations() {
         Location[] locations = new Location[5];
         for (int i = 0; i < 5; i++) {
-            Location temp = new Location("Localidade 1", new LatLng(123.2, -123.2), 5);
+            Location temp = new Location("Localidade " + i, new LatLng(123.2, -123.2), 5);
             locations[i] = temp;
         }
         return locations;
