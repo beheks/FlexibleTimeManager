@@ -40,7 +40,7 @@ public class LocationItemAdapter extends RecyclerView.Adapter<LocationItemAdapte
     @Override
     public void onBindViewHolder(LocationItemAdapter.ViewHolder holder, int position) {
         TextView locationTitle = (TextView) holder.mView.findViewById(R.id.location_title);
-        locationTitle.setText("<Localidade titulo>");
+        locationTitle.setText(mLocations[position].getName());
 
         RingTimerView locationRingTimer =
                 (RingTimerView) holder.mView.findViewById(R.id.location_ringTimerView);
