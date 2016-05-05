@@ -5,10 +5,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.widget.TextViewCompat;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 public class RingTimerView extends View {
     private Paint mPaintGoalNotReached;
@@ -25,6 +27,9 @@ public class RingTimerView extends View {
     private float mCenterOffset;
     private float mSmallTextHeight;
     private float mBigTextHeight;
+
+    private TextView mTextViewBig;
+    private TextView mTextViewSmall;
 
     private int x;
     private int y;
@@ -92,7 +97,7 @@ public class RingTimerView extends View {
 
         mTextSize = mRadius * 0.4f;
         mTextSpacing = mTextSize * 0.2f;
-        mSmallTextSize = mTextSize * 0.35f;
+        mSmallTextSize = mTextSize * 0.5f;
 
         Rect tempRect = new Rect();
 
