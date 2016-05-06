@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RingTimerView">
+        <attr name="ringStrokeWidth" format="dimension" />
+        <attr name="ringRadius" format="dimension" />
+
+        <attr name="ringColor" format="color" />
+        <attr name="ringFirstMilestoneColor" format="color" />
+        <attr name="ringSecondMilestoneColor" format="color" />
+
+        <attr name="timerTextSize" format="dimension"/>
+        <attr name="targetTextSize" format="dimension" />
+
+        <attr name="ringFirstMilestone" format="fraction" />
+        <attr name="ringSecondMilestone" format="fraction" />
+    </declare-styleable>
+</resources>

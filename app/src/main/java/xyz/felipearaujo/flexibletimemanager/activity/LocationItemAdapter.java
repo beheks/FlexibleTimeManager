@@ -4,11 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import xyz.felipearaujo.flexibletimemanager.R;
 import xyz.felipearaujo.flexibletimemanager.datasource.entities.Location;
-import xyz.felipearaujo.flexibletimemanager.view.RingTimerView;
+import xyz.felipearaujo.flexibletimemanager.widget.RingTimerView;
 
 public class LocationItemAdapter extends RecyclerView.Adapter<LocationItemAdapter.ViewHolder> {
 
@@ -33,8 +34,7 @@ public class LocationItemAdapter extends RecyclerView.Adapter<LocationItemAdapte
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.location_item, parent, false);
 
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override

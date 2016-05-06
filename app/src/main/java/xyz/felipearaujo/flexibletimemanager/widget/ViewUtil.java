@@ -1,10 +1,7 @@
-package xyz.felipearaujo.flexibletimemanager.view;
+package xyz.felipearaujo.flexibletimemanager.widget;
 
 import android.content.Context;
 
-/**
- * Created by Felipe on 03/05/2016.
- */
 public class ViewUtil {
     public static int dpToPx(final Context context, int dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density);

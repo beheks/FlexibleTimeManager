@@ -8,4 +8,9 @@
     <color name="colorSecondaryText">#727272</color>
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#B6B6B6</color>
+
+    <color name="light_grey">#DDDDDD</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
 </resources>
